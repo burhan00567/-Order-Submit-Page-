@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>অর্ডার ফর্ম</title>
+  <style>
+    body {
+      font-family: 'SolaimanLipi', Arial, sans-serif;
+      margin: 0; padding: 20px;
+      background-color: #f5f7fa;
+      display: flex; justify-content: center;
+    }
+    .order-form {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #555;
+    }
+    select, input[type="text"], input[type="submit"] {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      transition: border-color 0.3s;
+    }
+    select:focus, input[type="text"]:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+    input[readonly] {
+      background-color: #e9ecef;
+      cursor: not-allowed;
+    }
+    input[type="submit"] {
+      margin-top: 25px;
+      background-color: #007bff;
+      border: none;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+    @media (max-width: 480px) {
+      .order-form {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="order-form">
+    <h2>অর্ডার ফর্ম</h2>
+    <form id="orderForm" action="#" method="POST">
+      <label for="product">প্রোডাক্টের নাম :</label>
+      <input type="text" id="product" name="product" readonly />
+
+      <label for="totalPrice">দাম :(৳)</label>
+      <input type="text" id="totalPrice" name="totalPrice" readonly />
+
+      <label for="qty">পরিমাণ :</label>
+      <input type="text" id="qty" name="qty" readonly />
+
+      <label for="name">নাম :</label>
+      <input type="text" id="name" name="name" required placeholder="আপনার নাম লিখুন" />
+
+      <label for="phone">মোবাইল নাম্বার :</label>
+      <input type="text" id="phone" name="phone" required placeholder="মোবাইল নম্বর লিখুন" />
+
+      <label for="division">বিভাগ</label>
+      <select id="division" name="division" required>
+        <option value="">-- বিভাগ নির্বাচন করুন --</option>
+        <option value="ঢাকা">ঢাকা</option>
+        <option value="রংপুর">রংপুর</option>
+        <option value="চট্টগ্রাম">চট্টগ্রাম</option>
+        <option value="রাজশাহী">রাজশাহী</option>
+        <option value="খুলনা">খুলনা</option>
+        <option value="বরিশাল">বরিশাল</option>
+        <option value="সিলেট">সিলেট</option>
+      </select>
+
+      <label for="district">জেলা</label>
+      <select id="district" name="district" required disabled>
+        <option value="">-- জেলা নির্বাচন করুন --</option>
+      </select>
+
+      <label for="thana">থানা/উপজেলা</label>
+      <select id="thana" name="thana" required disabled>
+        <option value="">-- থানা/উপজেলা নির্বাচন করুন --</option>
+      </select>
+
+      <label for="village">গ্রাম / বিস্তারিত ঠিকানা :</label>
+      <input type="text" id="village" name="village" required placeholder="গ্রামের নাম লিখুন" />
+
+      <label for="pickup">সংগ্রহের স্থান :</label>
+      <input type="text" id="pickup" name="pickup" required placeholder="সংগ্রহের স্থান লিখুন" />
+
+      <input type="submit" value="অর্ডার সাবমিট করুন" />
+    </form>
+  </div>
+
+  <script>
+    const data = {
+      "ঢাকা": {
+        "ঢাকা": ["ঢাকা সদর", "ধানমন্ডি", "গুলশান", "মিরপুর"],
+        "নারায়ণগঞ্জ": ["সদর", "রূপগঞ্জ"],
+        "গাজীপুর": ["কাপাসিয়া", "কালিয়াকৈর"],
+        "কিশোরগঞ্জ": ["কুলিয়ারচর"],
+        "মুন্সিগঞ্জ": ["মুন্সিগঞ্জ সদর"],
+        "মানিকগঞ্জ": ["মানিকগঞ্জ সদর"],
+        "রাজবাড়ী": ["রাজবাড়ী সদর"],
+        "মাদারীপুর": ["মাদারীপুর সদর"],
+        "গোপালগঞ্জ": ["গোপালগঞ্জ সদর"],
+        "শরীয়তপুর": ["শরীয়তপুর সদর"],
+        "ফরিদপুর": ["ফরিদপুর সদর"],
+        "টাঙ্গাইল": ["টাঙ্গাইল সদর"],
+        "নরসিংদী": ["নরসিংদী সদর"]
+      },
+      "রংপুর": {
+        "রংপুর": ["সদর", "মিঠাপুকুর"],
+        "দিনাজপুর": ["দিনাজপুর সদর"],
+        "ঠাকুরগাঁও": ["ঠাকুরগাঁও সদর"],
+        "পঞ্চগড়": ["পঞ্চগড় সদর"],
+        "লালমনিরহাট": ["লালমনিরহাট সদর"],
+        "কুড়িগ্রাম": ["কুড়িগ্রাম সদর"]
+      },
+      "চট্টগ্রাম": {
+        "চট্টগ্রাম": ["পটিয়া", "সীতাকুণ্ড", "বন্দর"],
+        "কক্সবাজার": ["কক্সবাজার সদর", "টেকনাফ"]
+      },
+      "রাজশাহী": {
+        "রাজশাহী": ["রাজশাহী সদর", "পবা"],
+        "নওগাঁ": ["নওগাঁ সদর"]
+      },
+      "খুলনা": {
+        "খুলনা": ["খুলনা সদর", "দেবহাটা"],
+        "যশোর": ["যশোর সদর", "কেশবপুর"]
+      },
+      "বরিশাল": {
+        "বরিশাল": ["বরিশাল সদর", "বানারীপাড়া"],
+        "পটুয়াখালী": ["পটুয়াখালী সদর", "দশমিনা"]
+      },
+      "সিলেট": {
+        "সিলেট": ["সিলেট সদর", "জালালাবাদ"],
+        "মৌলভীবাজার": ["মৌলভীবাজার সদর", "কুলাউড়া"]
+      }
+    };
+
+    const divisionSelect = document.getElementById("division");
+    const districtSelect = document.getElementById("district");
+    const thanaSelect = document.getElementById("thana");
+
+    // পেজ লোডে জেলা ও থানা সিলেক্ট নিষ্ক্রিয়
+    window.addEventListener('DOMContentLoaded', () => {
+      districtSelect.disabled = true;
+      thanaSelect.disabled = true;
+
+      // URL প্যারামিটার থেকে প্রোডাক্টের নাম, দাম, পরিমাণ সেট করা
+      const urlParams = new URLSearchParams(window.location.search);
+      const product = urlParams.get('product');
+      const price = urlParams.get('price');
+      const qty = urlParams.get('qty');
+
+      if (product) document.getElementById('product').value = product;
+      if (price) document.getElementById('totalPrice').value = price;
+      if (qty) document.getElementById('qty').value = qty;
+    });
+
+    // বিভাগ সিলেক্ট হলে জেলা লোড এবং জেলা সিলেক্ট চালু করা
+    divisionSelect.addEventListener("change", function() {
+      const division = this.value;
+      districtSelect.innerHTML = '<option value="">-- জেলা নির্বাচন করুন --</option>';
+      thanaSelect.innerHTML = '<option value="">-- থানা/উপজেলা নির্বাচন করুন --</option>';
+      thanaSelect.disabled = true;
+
+      if (division && data[division]) {
+        Object.keys(data[division]).forEach(district => {
+          const option = document.createElement("option");
+          option.value = district;
+          option.textContent = district;
+          districtSelect.appendChild(option);
+        });
+        districtSelect.disabled = false;
+      } else {
+        districtSelect.disabled = true;
+      }
+    });
+
+    // জেলা সিলেক্ট হলে থানা লোড এবং থানা সিলেক্ট চালু করা
+    districtSelect.addEventListener("change", function() {
+      const division = divisionSelect.value;
+      const district = this.value;
+      thanaSelect.innerHTML = '<option value="">-- থানা/উপজেলা নির্বাচন করুন --</option>';
+
+      if (division && district && data[division] && data[division][district]) {
+        data[division][district].forEach(thana => {
+          const option = document.createElement("option");
+          option.value = thana;
+          option.textContent = thana;
+          thanaSelect.appendChild(option);
+        });
+        thanaSelect.disabled = false;
+      } else {
+        thanaSelect.disabled = true;
+      }
+    });
+
+    // ফর্ম সাবমিটের আগে ভ্যালিডেশন
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
+      const fields = [
+        { id: 'product', name: 'প্রোডাক্টের নাম' },
+        { id: 'totalPrice', name: 'দাম' },
+        { id: 'qty', name: 'পরিমাণ' },
+        { id: 'name', name: 'নাম' },
+        { id: 'phone', name: 'মোবাইল নাম্বার' },
+        { id: 'division', name: 'বিভাগ' },
+        { id: 'district', name: 'জেলা' },
+        { id: 'thana', name: 'থানা/উপজেলা' },
+        { id: 'village', name: 'গ্রাম / বিস্তারিত ঠিকানা' },
+        { id: 'pickup', name: 'সংগ্রহের স্থান' }
+      ];
+
+      for (const field of fields) {
+        const el = document.getElementById(field.id);
+        if (!el) continue;
+        const value = el.value.trim();
+        if (!value) {
+          alert(`${field.name} অবশ্যই পূরণ করতে হবে।`);
+          el.focus();
+          e.preventDefault();
+          return;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

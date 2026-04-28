@@ -4,124 +4,198 @@
   <meta name="google-site-verification" content="v_OrN5UgQImH1rlbIChBTWAMyOfCdlDl6YG_LBQSy-Y" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>অর্ডার ফর্ম</title>
+  <title>অর্ডার ফর্ম | পণ্য অর্ডার করুন</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
-      font-family: 'SolaimanLipi', Arial, sans-serif;
-      margin: 0; padding: 20px;
-      background-color: #f5f7fa;
-      display: flex; justify-content: center;
+      font-family: 'SolaimanLipi', 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(145deg, #e9f0f5 0%, #f1f5f9 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
     }
     .order-form {
       background: white;
-      padding: 25px;
-      border-radius: 10px;
-      max-width: 600px;
+      padding: 28px 30px;
+      border-radius: 28px;
+      max-width: 650px;
       width: 100%;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
     h2 {
       text-align: center;
-      margin-bottom: 20px;
-      color: #333;
+      margin-bottom: 10px;
+      color: #1e2a47;
+      font-weight: 700;
+      font-size: 28px;
+      letter-spacing: -0.2px;
+      border-bottom: 3px solid #0077ff;
+      display: inline-block;
+      width: auto;
+      padding-bottom: 8px;
+    }
+    .form-header {
+      text-align: center;
+      margin-bottom: 25px;
     }
     label {
       display: block;
-      margin-top: 15px;
-      margin-bottom: 6px;
+      margin-top: 18px;
+      margin-bottom: 7px;
       font-weight: 600;
-      color: #555;
+      color: #1e2f4e;
+      font-size: 0.95rem;
     }
-    select, input[type="text"], input[type="submit"] {
+    select, input[type="text"], input[type="tel"], input[type="submit"] {
       width: 100%;
-      padding: 10px 12px;
+      padding: 12px 14px;
       font-size: 16px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+      border-radius: 16px;
+      border: 1.5px solid #e2e8f0;
+      background-color: #fefefe;
       box-sizing: border-box;
-      transition: border-color 0.3s;
+      transition: all 0.2s;
+      font-family: inherit;
     }
-    select:focus, input[type="text"]:focus {
-      border-color: #007bff;
+    select:focus, input[type="text"]:focus, input[type="tel"]:focus {
+      border-color: #0077ff;
       outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.2);
+      background-color: #fff;
     }
     input[readonly] {
-      background-color: #e9ecef;
-      cursor: not-allowed;
+      background-color: #f8fafc;
+      cursor: default;
+      border-color: #e2edf7;
+      color: #1e2a47;
+      font-weight: 500;
     }
     input[type="submit"] {
-      margin-top: 25px;
-      background-color: #007bff;
+      margin-top: 30px;
+      background: linear-gradient(95deg, #0077ff, #0056cc);
       border: none;
       color: white;
       font-weight: 700;
+      font-size: 18px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: all 0.25s;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 10px rgba(0, 119, 255, 0.3);
+      border-radius: 40px;
+      padding: 14px;
     }
     input[type="submit"]:hover {
-      background-color: #0056b3;
+      background: linear-gradient(95deg, #0066e6, #0047b3);
+      transform: scale(1.01);
+      box-shadow: 0 8px 18px rgba(0, 85, 204, 0.3);
     }
-    @media (max-width: 480px) {
+    .required-star::after {
+      content: " *";
+      color: #e53e3e;
+      font-weight: bold;
+    }
+    .form-row {
+      margin-bottom: 5px;
+    }
+    @media (max-width: 550px) {
       .order-form {
-        padding: 15px;
+        padding: 20px 18px;
       }
+      h2 {
+        font-size: 24px;
+      }
+      select, input {
+        font-size: 15px;
+        padding: 10px 12px;
+      }
+    }
+    .info-badge {
+      background: #eef2ff;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      color: #1e40af;
+      text-align: center;
+      margin-top: 12px;
     }
   </style>
 </head>
 <body>
-  <div class="order-form">
-    <h2>অর্ডার ফর্ম</h2>
-    <form id="orderForm" action="#" method="POST">
-      <label for="product">প্রোডাক্টের নাম :</label>
-      <input type="text" id="product" name="product" readonly />
-
-      <label for="totalPrice">দাম :(৳)</label>
-      <input type="text" id="totalPrice" name="totalPrice" readonly />
-
-      <label for="qty">পরিমাণ :</label>
-      <input type="text" id="qty" name="qty" readonly />
-
-      <label for="name">নাম :</label>
-      <input type="text" id="name" name="name" required placeholder="আপনার নাম লিখুন" />
-
-      <label for="phone">মোবাইল নাম্বার :</label>
-      <input type="text" id="phone" name="phone" required placeholder="মোবাইল নম্বর লিখুন" />
-
-      <label for="division">বিভাগ</label>
-      <select id="division" name="division" required>
-        <option value="">-- বিভাগ নির্বাচন করুন --</option>
-        <option value="ঢাকা">ঢাকা</option>
-        <option value="রংপুর">রংপুর</option>
-        <option value= "ময়মনসিংহ">ময়মনসিংহ</option>
-        <option value="চট্টগ্রাম">চট্টগ্রাম</option>
-        <option value="রাজশাহী">রাজশাহী</option>
-        <option value="খুলনা">খুলনা</option>
-        <option value="বরিশাল">বরিশাল</option>
-        <option value="সিলেট">সিলেট</option>
-      </select>
-
-      <label for="district">জেলা</label>
-      <select id="district" name="district" required disabled>
-        <option value="">-- জেলা নির্বাচন করুন --</option>
-      </select>
-
-      <label for="thana">থানা/উপজেলা</label>
-      <select id="thana" name="thana" required disabled>
-        <option value="">-- থানা/উপজেলা নির্বাচন করুন --</option>
-      </select>
-
-      <label for="village">গ্রাম / বিস্তারিত ঠিকানা :</label>
-      <input type="text" id="village" name="village" required placeholder="গ্রামের নাম লিখুন" />
-
-      <label for="pickup">সংগ্রহের স্থান :</label>
-      <input type="text" id="pickup" name="pickup" required placeholder="সংগ্রহের স্থান লিখুন" />
-
-      <input type="submit" value="অর্ডার সাবমিট করুন" />
-    </form>
+<div class="order-form">
+  <div class="form-header">
+    <h2>📦 অর্ডার ফর্ম</h2>
+    <div class="info-badge">✅ ক্যাশ অন ডেলিভারি | সঠিক তথ্য দিন</div>
   </div>
 
-  <script>
-    const data ={
+  <!-- FormSubmit integration: email ও _captcha false, subject customize -->
+  <form id="orderForm" action="https://formsubmit.co/amarbd00678@gmail.com" method="POST">
+    <!-- FormSubmit hidden configuration (same as Facebook style example) -->
+    <input type="hidden" name="_subject" value="🛍️ নতুন অর্ডার জমা হয়েছে - ওয়েবসাইট থেকে">
+    <input type="hidden" name="_captcha" value="false">
+    <!-- optional: disable auto reply (default is okay) -->
+    <input type="hidden" name="_template" value="table">
+    
+    <!-- প্রোডাক্ট তথ্য (URL থেকে নেয়া) -->
+    <label for="product" class="required-star">প্রোডাক্টের নাম :</label>
+    <input type="text" id="product" name="product" readonly />
+
+    <label for="totalPrice" class="required-star">মোট দাম : (৳)</label>
+    <input type="text" id="totalPrice" name="totalPrice" readonly />
+
+    <label for="qty" class="required-star">পরিমাণ :</label>
+    <input type="text" id="qty" name="qty" readonly />
+
+    <label for="name" class="required-star">পূর্ণ নাম :</label>
+    <input type="text" id="name" name="name" required placeholder="আপনার সম্পূর্ণ নাম লিখুন" />
+
+    <label for="phone" class="required-star">মোবাইল নাম্বার :</label>
+    <input type="tel" id="phone" name="phone" required placeholder="01XXXXXXXXX" />
+
+    <label for="division" class="required-star">বিভাগ</label>
+    <select id="division" name="division" required>
+      <option value="">-- বিভাগ নির্বাচন করুন --</option>
+      <option value="ঢাকা">ঢাকা</option>
+      <option value="রংপুর">রংপুর</option>
+      <option value="ময়মনসিংহ">ময়মনসিংহ</option>
+      <option value="চট্টগ্রাম">চট্টগ্রাম</option>
+      <option value="রাজশাহী">রাজশাহী</option>
+      <option value="খুলনা">খুলনা</option>
+      <option value="বরিশাল">বরিশাল</option>
+      <option value="সিলেট">সিলেট</option>
+    </select>
+
+    <label for="district" class="required-star">জেলা</label>
+    <select id="district" name="district" required disabled>
+      <option value="">-- জেলা নির্বাচন করুন --</option>
+    </select>
+
+    <label for="thana" class="required-star">থানা / উপজেলা</label>
+    <select id="thana" name="thana" required disabled>
+      <option value="">-- থানা/উপজেলা নির্বাচন করুন --</option>
+    </select>
+
+    <label for="village" class="required-star">গ্রাম / বিস্তারিত ঠিকানা :</label>
+    <input type="text" id="village" name="village" required placeholder="বাড়ির নাম/রাস্তা/গ্রাম" />
+
+    <label for="pickup" class="required-star">সংগ্রহের স্থান :</label>
+    <input type="text" id="pickup" name="pickup" required placeholder="কুরিয়ার পয়েন্ট / অফিসের নাম" />
+
+    <input type="submit" value="✅ অর্ডার কনফার্ম করুন" />
+  </form>
+</div>
+
+<script>
+  // ======================== বাংলাদেশের জেলা ও থানার সম্পূর্ণ ডেটা ========================
+  const data ={
   "রংপুর": {  
     "রংপুর": ["সদর", "মিঠাপুকুর", "বদরগঞ্জ", "গঙ্গাচড়া", "পীরগঞ্জ", "কাউনিয়া", "তারাগঞ্জ", "হারাগাছ"],  
     "দিনাজপুর": ["দিনাজপুর সদর", "বোচাগঞ্জ", "বিরল", "কাহারোল", "পার্বতীপুর", "ফুলবাড়ী", "নবাবগঞ্জ", "ঘোড়াঘাট", "বিরামপুর", "হাকিমপুর", "চিরিরবন্দর", "খানসামা", "হিলি"],  
@@ -192,134 +266,134 @@
     "চাঁদপুর": ["চাঁদপুর সদর", "হাজীগঞ্জ", "ফরিদগঞ্জ", "শাহরাস্তি", "কচুয়া", "মতলব উত্তর", "মতলব দক্ষিণ"],  
     "ব্রাহ্মণবাড়িয়া": ["ব্রাহ্মণবাড়িয়া সদর", "নবীনগর", "কসবা", "সরাইল", "আশুগঞ্জ", "বাঞ্ছারামপুর", "বিজয়নগর", "আখাউড়া"]  
   },  
- 
   "রাজশাহী": {
-    "রাজশাহী": [
-      "বোয়ালিয়া মডেল", "রাজপাড়া", "শাহ মখদুম", "মতিহার",
-      "পবা", "বাগমারা", "গোদাগাড়ী", "চারঘাট",
-      "দূর্গাপুর", "মোহনপুর", "পুঠিয়া", "তানোর"
-    ],
-    "নাটোর": [
-      "নাটোর সদর", "নলডাঙ্গা", "বড়াইগ্রাম",
-      "বাগাতিপাড়া", "লালপুর", "গুরুদাসপুর", "সিংড়া"
-    ],
-    "নওগাঁ": [
-      "নওগাঁ সদর", "মহাদেবপুর", "মান্দা", "আত্রাই",
-      "রাণীনগর", "পত্নীতলা", "ধামইরহাট",
-      "সাপাহার", "পোরশা", "নিয়ামতপুর", "বদলগাছী"
-    ],
-    "পাবনা": [
-      "পাবনা সদর", "ঈশ্বরদী", "আটঘরিয়া", "সাঁথিয়া",
-      "সুজানগর", "বেড়া", "ভাঙ্গুড়া", "চাটমোহর", "ফরিদপুর (পাবনা)"
-    ],
-    "বগুড়া": [
-      "বগুড়া সদর", "শাহজাহানপুর", "গাবতলী",
-      "শেরপুর", "শিবগঞ্জ", "সোনাতলা", "ধুনট",
-      "সারিয়াকান্দি", "দুপচাঁচিয়া", "আদমদিঘি",
-      "কাহালু", "নন্দীগ্রাম"
-    ],
-    "জয়পুরহাট": [
-      "জয়পুরহাট সদর", "আক্কেলপুর",
-      "কালাই", "পাঁচবিবি", "ক্ষেতলাল"
-    ],
-    "চাঁপাইনবাবগঞ্জ": [
-      "চাঁপাইনবাবগঞ্জ সদর", "শিবগঞ্জ",
-      "গোমস্তাপুর", "নাচোল", "ভোলাহাট"
-    ],
-    "সিরাজগঞ্জ": [
-      "সিরাজগঞ্জ সদর", "কামারখন্দ", "কাজিপুর",
-      "রায়গঞ্জ", "তাড়াশ", "উল্লাপাড়া",
-      "শাহজাদপুর", "বেলকুচি", "চৌহালী"
-    ]
-  }
-};
+    "রাজশাহী": ["বোয়ালিয়া মডেল", "রাজপাড়া", "শাহ মখদুম", "মতিহার", "পবা", "বাগমারা", "গোদাগাড়ী", "চারঘাট", "দূর্গাপুর", "মোহনপুর", "পুঠিয়া", "তানোর"],
+    "নাটোর": ["নাটোর সদর", "নলডাঙ্গা", "বড়াইগ্রাম", "বাগাতিপাড়া", "লালপুর", "গুরুদাসপুর", "সিংড়া"],
+    "নওগাঁ": ["নওগাঁ সদর", "মহাদেবপুর", "মান্দা", "আত্রাই", "রাণীনগর", "পত্নীতলা", "ধামইরহাট", "সাপাহার", "পোরশা", "নিয়ামতপুর", "বদলগাছী"],
+    "পাবনা": ["পাবনা সদর", "ঈশ্বরদী", "আটঘরিয়া", "সাঁথিয়া", "সুজানগর", "বেড়া", "ভাঙ্গুড়া", "চাটমোহর", "ফরিদপুর (পাবনা)"],
+    "বগুড়া": ["বগুড়া সদর", "শাহজাহানপুর", "গাবতলী", "শেরপুর", "শিবগঞ্জ", "সোনাতলা", "ধুনট", "সারিয়াকান্দি", "দুপচাঁচিয়া", "আদমদিঘি", "কাহালু", "নন্দীগ্রাম"],
+    "জয়পুরহাট": ["জয়পুরহাট সদর", "আক্কেলপুর", "কালাই", "পাঁচবিবি", "ক্ষেতলাল"],
+    "চাঁপাইনবাবগঞ্জ": ["চাঁপাইনবাবগঞ্জ সদর", "শিবগঞ্জ", "গোমস্তাপুর", "নাচোল", "ভোলাহাট"],
+    "সিরাজগঞ্জ": ["সিরাজগঞ্জ সদর", "কামারখন্দ", "কাজিপুর", "রায়গঞ্জ", "তাড়াশ", "উল্লাপাড়া", "শাহজাদপুর", "বেলকুচি", "চৌহালী"]
+    }
+  };
 
-    const divisionSelect = document.getElementById("division");
-    const districtSelect = document.getElementById("district");
-    const thanaSelect = document.getElementById("thana");
+  // DOM elements
+  const divisionSelect = document.getElementById("division");
+  const districtSelect = document.getElementById("district");
+  const thanaSelect = document.getElementById("thana");
 
-    // পেজ লোডে জেলা ও থানা সিলেক্ট নিষ্ক্রিয়
-    window.addEventListener('DOMContentLoaded', () => {
+  // URL parameter থেকে প্রোডাক্ট, মূল্য ও পরিমাণ সেট করা
+  window.addEventListener('DOMContentLoaded', () => {
+    districtSelect.disabled = true;
+    thanaSelect.disabled = true;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const product = urlParams.get('product');
+    const price = urlParams.get('price');
+    const qty = urlParams.get('qty');
+
+    if (product) document.getElementById('product').value = product;
+    if (price) document.getElementById('totalPrice').value = price;
+    if (qty) document.getElementById('qty').value = qty;
+
+    // ফিল্ড যদি ফাঁকা থাকে তাহলে ইউজার বুঝতে পারে (কোয়েরি স্ট্রিং ছাড়া পেজ খুললে)
+    if (!product) document.getElementById('product').value = "পণ্য নির্বাচিত হয়নি";
+    if (!price) document.getElementById('totalPrice').value = "০";
+    if (!qty) document.getElementById('qty').value = "১";
+  });
+
+  // বিভাগ পরিবর্তনে জেলা লোড
+  divisionSelect.addEventListener("change", function() {
+    const division = this.value;
+    districtSelect.innerHTML = '<option value="">-- জেলা নির্বাচন করুন --</option>';
+    thanaSelect.innerHTML = '<option value="">-- থানা/উপজেলা নির্বাচন করুন --</option>';
+    thanaSelect.disabled = true;
+
+    if (division && data[division]) {
+      Object.keys(data[division]).forEach(district => {
+        const option = document.createElement("option");
+        option.value = district;
+        option.textContent = district;
+        districtSelect.appendChild(option);
+      });
+      districtSelect.disabled = false;
+    } else {
       districtSelect.disabled = true;
-      thanaSelect.disabled = true;
-
-      // URL প্যারামিটার থেকে প্রোডাক্টের নাম, দাম, পরিমাণ সেট করা
-      const urlParams = new URLSearchParams(window.location.search);
-      const product = urlParams.get('product');
-      const price = urlParams.get('price');
-      const qty = urlParams.get('qty');
-
-      if (product) document.getElementById('product').value = product;
-      if (price) document.getElementById('totalPrice').value = price;
-      if (qty) document.getElementById('qty').value = qty;
-    });
-
-    // বিভাগ সিলেক্ট হলে জেলা লোড এবং জেলা সিলেক্ট চালু করা
-    divisionSelect.addEventListener("change", function() {
-      const division = this.value;
       districtSelect.innerHTML = '<option value="">-- জেলা নির্বাচন করুন --</option>';
-      thanaSelect.innerHTML = '<option value="">-- থানা/উপজেলা নির্বাচন করুন --</option>';
+    }
+  });
+
+  // জেলা পরিবর্তনে থানা লোড
+  districtSelect.addEventListener("change", function() {
+    const division = divisionSelect.value;
+    const district = this.value;
+    thanaSelect.innerHTML = '<option value="">-- থানা/উপজেলা নির্বাচন করুন --</option>';
+
+    if (division && district && data[division] && data[division][district]) {
+      data[division][district].forEach(thana => {
+        const option = document.createElement("option");
+        option.value = thana;
+        option.textContent = thana;
+        thanaSelect.appendChild(option);
+      });
+      thanaSelect.disabled = false;
+    } else {
       thanaSelect.disabled = true;
+    }
+  });
 
-      if (division && data[division]) {
-        Object.keys(data[division]).forEach(district => {
-          const option = document.createElement("option");
-          option.value = district;
-          option.textContent = district;
-          districtSelect.appendChild(option);
-        });
-        districtSelect.disabled = false;
+  // ফাইনাল সাবমিটের আগে সম্পূর্ণ ভ্যালিডেশন (readonly সহ সব ফিল্ড, থানা/জেলা সিলেক্টেড)
+  document.getElementById('orderForm').addEventListener('submit', function(e) {
+    const fields = [
+      { id: 'product', name: 'প্রোডাক্টের নাম' },
+      { id: 'totalPrice', name: 'মোট দাম' },
+      { id: 'qty', name: 'পরিমাণ' },
+      { id: 'name', name: 'পূর্ণ নাম' },
+      { id: 'phone', name: 'মোবাইল নাম্বার' },
+      { id: 'division', name: 'বিভাগ' },
+      { id: 'district', name: 'জেলা' },
+      { id: 'thana', name: 'থানা/উপজেলা' },
+      { id: 'village', name: 'গ্রাম / বিস্তারিত ঠিকানা' },
+      { id: 'pickup', name: 'সংগ্রহের স্থান' }
+    ];
+
+    for (const field of fields) {
+      const el = document.getElementById(field.id);
+      if (!el) continue;
+      let value = '';
+      if (el.tagName === 'SELECT') {
+        value = el.options[el.selectedIndex]?.value || '';
       } else {
-        districtSelect.disabled = true;
+        value = el.value.trim();
       }
-    });
-
-    // জেলা সিলেক্ট হলে থানা লোড এবং থানা সিলেক্ট চালু করা
-    districtSelect.addEventListener("change", function() {
-      const division = divisionSelect.value;
-      const district = this.value;
-      thanaSelect.innerHTML = '<option value="">-- থানা/উপজেলা নির্বাচন করুন --</option>';
-
-      if (division && district && data[division] && data[division][district]) {
-        data[division][district].forEach(thana => {
-          const option = document.createElement("option");
-          option.value = thana;
-          option.textContent = thana;
-          thanaSelect.appendChild(option);
-        });
-        thanaSelect.disabled = false;
-      } else {
-        thanaSelect.disabled = true;
+      if (!value) {
+        alert(`⚠️ ${field.name} অবশ্যই পূরণ করতে হবে।`);
+        el.focus();
+        e.preventDefault();
+        return;
       }
-    });
+    }
 
-    // ফর্ম সাবমিটের আগে ভ্যালিডেশন
-    document.getElementById('orderForm').addEventListener('submit', function(e) {
-      const fields = [
-        { id: 'product', name: 'প্রোডাক্টের নাম' },
-        { id: 'totalPrice', name: 'দাম' },
-        { id: 'qty', name: 'পরিমাণ' },
-        { id: 'name', name: 'নাম' },
-        { id: 'phone', name: 'মোবাইল নাম্বার' },
-        { id: 'division', name: 'বিভাগ' },
-        { id: 'district', name: 'জেলা' },
-        { id: 'thana', name: 'থানা/উপজেলা' },
-        { id: 'village', name: 'গ্রাম / বিস্তারিত ঠিকানা' },
-        { id: 'pickup', name: 'সংগ্রহের স্থান' }
-      ];
+    // মোবাইল নাম্বার মোটামুটি 11 ডিজিটের কিনা বেসিক চেক
+    const phoneVal = document.getElementById('phone').value.trim();
+    const phoneDigits = phoneVal.replace(/\D/g, '');
+    if (phoneDigits.length < 10 || phoneDigits.length > 14) {
+      alert('📱 সঠিক মোবাইল নাম্বার দিন (০১XXXXXXXXX ফরম্যাটে)');
+      document.getElementById('phone').focus();
+      e.preventDefault();
+      return;
+    }
 
-      for (const field of fields) {
-        const el = document.getElementById(field.id);
-        if (!el) continue;
-        const value = el.value.trim();
-        if (!value) {
-          alert(`${field.name} অবশ্যই পূরণ করতে হবে।`);
-          el.focus();
-          e.preventDefault();
-          return;
-        }
-      }
-    });
-  </script>
+    // জেলা ও থানা সিলেক্টেড কিনা নিশ্চিত (select মানে value অবশ্যই সেট)
+    if (!divisionSelect.value || !districtSelect.value || !thanaSelect.value) {
+      alert('দয়া করে সম্পূর্ণ ঠিকানা (বিভাগ, জেলা, থানা) নির্বাচন করুন');
+      e.preventDefault();
+      return;
+    }
+
+    // সব ঠিক থাকলে ফর্ম Submit হবে FormSubmit এ
+  });
+</script>
 </body>
 </html>

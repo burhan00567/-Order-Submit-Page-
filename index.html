@@ -289,13 +289,23 @@
     thanaSelect.disabled = true;
 
     const urlParams = new URLSearchParams(window.location.search);
-    const product = urlParams.get('product');
-    const price = urlParams.get('price');
-    const qty = urlParams.get('qty');
 
-    if (product) document.getElementById('product').value = product;
-    if (price) document.getElementById('totalPrice').value = price;
-    if (qty) document.getElementById('qty').value = qty;
+// 👉 এখানে তুমি আগে যেটা পাঠাচ্ছো সেটার সাথে মিল রাখতে হবে
+const product = urlParams.get('name');   // ❗ name (product না)
+const price = urlParams.get('price');
+const qty = urlParams.get('qty');
+
+if (product) {
+  document.getElementById('product').value = product;
+}
+
+if (price) {
+  document.getElementById('totalPrice').value = price;
+}
+
+if (qty) {
+  document.getElementById('qty').value = qty;
+}
 
     // ফিল্ড যদি ফাঁকা থাকে তাহলে ইউজার বুঝতে পারে (কোয়েরি স্ট্রিং ছাড়া পেজ খুললে)
     if (!product) document.getElementById('product').value = "পণ্য নির্বাচিত হয়নি";

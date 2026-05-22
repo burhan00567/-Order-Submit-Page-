@@ -282,7 +282,7 @@
   // ==================== URL থেকে পণ্যের তথ্য ====================
   window.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(window.location.search);
-    const name  = params.get('name')  || 'পণ্য নির্বাচিত হয়নি';
+    const name  = params.get('product') || params.get('name') || 'পণ্য নির্বাচিত হয়নি';
     const price = params.get('price') || '০';
     const qty   = params.get('qty')   || '১';
 

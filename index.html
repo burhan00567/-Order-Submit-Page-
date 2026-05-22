@@ -1,176 +1,177 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta name="google-site-verification" content="v_OrN5UgQImH1rlbIChBTWAMyOfCdlDl6YG_LBQSy-Y" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>অর্ডার ফর্ম | পণ্য অর্ডার করুন</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'SolaimanLipi', 'Segoe UI', Arial, sans-serif;
-      margin: 0;
+      font-family: system-ui, 'Segoe UI', Arial, sans-serif;
       padding: 20px;
       background: linear-gradient(145deg, #e9f0f5 0%, #f1f5f9 100%);
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       min-height: 100vh;
     }
     .order-form {
       background: white;
-      padding: 28px 30px;
+      padding: 28px 26px;
       border-radius: 28px;
-      max-width: 650px;
+      max-width: 600px;
       width: 100%;
-      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
-      transition: all 0.2s ease;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
     }
+    .form-header { text-align: center; margin-bottom: 24px; }
     h2 {
-      text-align: center;
-      margin-bottom: 10px;
       color: #1e2a47;
-      font-weight: 700;
-      font-size: 28px;
-      letter-spacing: -0.2px;
-      border-bottom: 3px solid #0077ff;
+      font-weight: 800;
+      font-size: 26px;
+      border-bottom: 3px solid #ff4c3b;
       display: inline-block;
-      width: auto;
       padding-bottom: 8px;
+      margin-bottom: 10px;
     }
-    .form-header {
-      text-align: center;
-      margin-bottom: 25px;
+    .info-badge {
+      background: #fff3f0;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      color: #ff4c3b;
+      font-weight: 600;
+      display: inline-block;
     }
+
+    /* প্রোডাক্ট সারাংশ বক্স */
+    .product-summary {
+      background: #fff8f7;
+      border: 1.5px solid #ffe0db;
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .product-summary .pname {
+      font-weight: 700;
+      color: #1e2a3e;
+      font-size: 1rem;
+    }
+    .product-summary .ptotal {
+      font-weight: 800;
+      color: #ff4c3b;
+      font-size: 1.2rem;
+    }
+    .product-summary .pqty {
+      font-size: 13px;
+      color: #666;
+      background: #f0f0f0;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
     label {
       display: block;
-      margin-top: 18px;
-      margin-bottom: 7px;
+      margin-top: 16px;
+      margin-bottom: 6px;
       font-weight: 600;
       color: #1e2f4e;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
-    select, input[type="text"], input[type="tel"], input[type="submit"] {
+    .required-star::after { content: " *"; color: #e53e3e; }
+
+    select, input[type="text"], input[type="tel"] {
       width: 100%;
       padding: 12px 14px;
-      font-size: 16px;
-      border-radius: 16px;
+      font-size: 15px;
+      border-radius: 14px;
       border: 1.5px solid #e2e8f0;
       background-color: #fefefe;
       box-sizing: border-box;
       transition: all 0.2s;
       font-family: inherit;
+      color: #1e2a3e;
     }
     select:focus, input[type="text"]:focus, input[type="tel"]:focus {
-      border-color: #0077ff;
+      border-color: #ff4c3b;
       outline: none;
-      box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.2);
-      background-color: #fff;
+      box-shadow: 0 0 0 3px rgba(255,76,59,0.15);
     }
     input[readonly] {
       background-color: #f8fafc;
       cursor: default;
       border-color: #e2edf7;
-      color: #1e2a47;
-      font-weight: 500;
+      color: #555;
     }
-    input[type="submit"] {
-      margin-top: 30px;
-      background: linear-gradient(95deg, #0077ff, #0056cc);
+
+    .submit-btn {
+      margin-top: 28px;
+      width: 100%;
+      background: linear-gradient(95deg, #ff4c3b, #e03a29);
       border: none;
       color: white;
       font-weight: 700;
       font-size: 18px;
       cursor: pointer;
-      transition: all 0.25s;
-      letter-spacing: 0.5px;
-      box-shadow: 0 4px 10px rgba(0, 119, 255, 0.3);
+      padding: 15px;
       border-radius: 40px;
-      padding: 14px;
+      box-shadow: 0 4px 14px rgba(255,76,59,0.35);
+      transition: all 0.25s;
+      font-family: inherit;
     }
-    input[type="submit"]:hover {
-      background: linear-gradient(95deg, #0066e6, #0047b3);
+    .submit-btn:hover {
       transform: scale(1.01);
-      box-shadow: 0 8px 18px rgba(0, 85, 204, 0.3);
+      box-shadow: 0 8px 20px rgba(255,76,59,0.35);
     }
-    .required-star::after {
-      content: " *";
-      color: #e53e3e;
-      font-weight: bold;
-    }
-    .form-row {
-      margin-bottom: 5px;
-    }
-    @media (max-width: 550px) {
-      .order-form {
-        padding: 20px 18px;
-      }
-      h2 {
-        font-size: 24px;
-      }
-      select, input {
-        font-size: 15px;
-        padding: 10px 12px;
-      }
-    }
-    .info-badge {
-      background: #eef2ff;
-      padding: 8px 12px;
-      border-radius: 20px;
-      font-size: 13px;
-      color: #1e40af;
-      text-align: center;
-      margin-top: 12px;
+    .submit-btn:active { transform: scale(0.99); }
+
+    @media (max-width: 500px) {
+      .order-form { padding: 20px 16px; }
+      h2 { font-size: 22px; }
     }
   </style>
 </head>
 <body>
 <div class="order-form">
   <div class="form-header">
-    <h2>📦 অর্ডার ফর্ম</h2>
+    <h2>📦 অর্ডার ফর্ম</h2><br>
     <div class="info-badge">✅ ক্যাশ অন ডেলিভারি | সঠিক তথ্য দিন</div>
   </div>
 
-  <!-- FormSubmit integration: email ও _captcha false, subject customize -->
+  <!-- প্রোডাক্ট সারাংশ -->
+  <div class="product-summary">
+    <span class="pname" id="summaryName">—</span>
+    <span class="pqty" id="summaryQty">—</span>
+    <span class="ptotal" id="summaryPrice">—</span>
+  </div>
+
   <form id="orderForm" action="https://formsubmit.co/amarbd00678@gmail.com" method="POST">
-    <!-- FormSubmit hidden configuration (same as Facebook style example) -->
-    <input type="hidden" name="_subject" value="🛍️ নতুন অর্ডার জমা হয়েছে - ওয়েবসাইট থেকে">
+    <input type="hidden" name="_subject" value="🛍️ নতুন অর্ডার জমা হয়েছে - ওয়েবসাইট থেকে">
     <input type="hidden" name="_captcha" value="false">
-    <!-- optional: disable auto reply (default is okay) -->
     <input type="hidden" name="_template" value="table">
-    
-    <!-- প্রোডাক্ট তথ্য (URL থেকে নেয়া) -->
-    <label for="product" class="required-star">প্রোডাক্টের নাম :</label>
-    <input type="text" id="product" name="product" readonly />
 
-    <label for="totalPrice" class="required-star">মোট দাম : (৳)</label>
-    <input type="text" id="totalPrice" name="totalPrice" readonly />
+    <!-- hidden fields — ফর্ম ডেটায় যাবে -->
+    <input type="hidden" id="product" name="product">
+    <input type="hidden" id="totalPrice" name="totalPrice">
+    <input type="hidden" id="qty" name="qty">
 
-    <label for="qty" class="required-star">পরিমাণ :</label>
-    <input type="text" id="qty" name="qty" readonly />
+    <label for="name" class="required-star">পূর্ণ নাম</label>
+    <input type="text" id="name" name="name" required placeholder="আপনার সম্পূর্ণ নাম লিখুন">
 
-    <label for="name" class="required-star">পূর্ণ নাম :</label>
-    <input type="text" id="name" name="name" required placeholder="আপনার সম্পূর্ণ নাম লিখুন" />
-
-    <label for="phone" class="required-star">মোবাইল নাম্বার :</label>
-    <input type="tel" id="phone" name="phone" required placeholder="01XXXXXXXXX" />
+    <label for="phone" class="required-star">মোবাইল নাম্বার</label>
+    <input type="tel" id="phone" name="phone" required placeholder="01XXXXXXXXX">
 
     <label for="division" class="required-star">বিভাগ</label>
     <select id="division" name="division" required>
       <option value="">-- বিভাগ নির্বাচন করুন --</option>
-      <option value="ঢাকা">ঢাকা</option>
-      <option value="রংপুর">রংপুর</option>
-      <option value="ময়মনসিংহ">ময়মনসিংহ</option>
-      <option value="চট্টগ্রাম">চট্টগ্রাম</option>
-      <option value="রাজশাহী">রাজশাহী</option>
-      <option value="খুলনা">খুলনা</option>
-      <option value="বরিশাল">বরিশাল</option>
-      <option value="সিলেট">সিলেট</option>
+      <option>ঢাকা</option><option>রংপুর</option><option>ময়মনসিংহ</option>
+      <option>চট্টগ্রাম</option><option>রাজশাহী</option><option>খুলনা</option>
+      <option>বরিশাল</option><option>সিলেট</option>
     </select>
 
     <label for="district" class="required-star">জেলা</label>
@@ -183,169 +184,155 @@
       <option value="">-- থানা/উপজেলা নির্বাচন করুন --</option>
     </select>
 
-    <label for="village" class="required-star">গ্রাম / বিস্তারিত ঠিকানা :</label>
-    <input type="text" id="village" name="village" required placeholder="বাড়ির নাম/রাস্তা/গ্রাম" />
+    <label for="village" class="required-star">গ্রাম / বিস্তারিত ঠিকানা</label>
+    <input type="text" id="village" name="village" required placeholder="বাড়ির নাম / রাস্তা / গ্রাম">
 
-    <label for="pickup" class="required-star">সংগ্রহের স্থান :</label>
-    <input type="text" id="pickup" name="pickup" required placeholder="কুরিয়ার পয়েন্ট / অফিসের নাম" />
+    <label for="pickup" class="required-star">সংগ্রহের স্থান</label>
+    <input type="text" id="pickup" name="pickup" required placeholder="কুরিয়ার পয়েন্ট / অফিসের নাম">
 
-    <input type="submit" value="✅ অর্ডার কনফার্ম করুন" />
+    <button type="submit" class="submit-btn">✅ অর্ডার কনফার্ম করুন</button>
   </form>
 </div>
 
 <script>
-  // ======================== বাংলাদেশের জেলা ও থানার সম্পূর্ণ ডেটা ========================
-  const data ={
-  "রংপুর": {  
-    "রংপুর": ["সদর", "মিঠাপুকুর", "বদরগঞ্জ", "গঙ্গাচড়া", "পীরগঞ্জ", "কাউনিয়া", "তারাগঞ্জ", "হারাগাছ"],  
-    "দিনাজপুর": ["দিনাজপুর সদর", "বোচাগঞ্জ", "বিরল", "কাহারোল", "পার্বতীপুর", "ফুলবাড়ী", "নবাবগঞ্জ", "ঘোড়াঘাট", "বিরামপুর", "হাকিমপুর", "চিরিরবন্দর", "খানসামা", "হিলি"],  
-    "গাইবান্ধা": ["গাইবান্ধা সদর", "সুন্দরগঞ্জ", "সাদুল্লাপুর", "পলাশবাড়ী", "গোবিন্দগঞ্জ", "ফুলছড়ি", "সাঘাটা"],  
-    "কুড়িগ্রাম": ["কুড়িগ্রাম সদর", "নাগেশ্বরী", "ভূরুঙ্গামারী", "রৌমারী", "চিলমারী", "রাজারহাট", "ফুলবাড়ী", "উলিপুর", "রাজিবপুর"],  
-    "লালমনিরহাট": ["লালমনিরহাট সদর", "কালীগঞ্জ", "হাতীবান্ধা", "পাটগ্রাম", "আদিতমারী"],  
-    "নীলফামারী": ["নীলফামারী সদর", "সৈয়দপুর", "জলঢাকা", "কিশোরগঞ্জ", "ডোমার", "ডিমলা"],  
-    "ঠাকুরগাঁও": ["ঠাকুরগাঁও সদর", "পীরগঞ্জ", "রানীশংকৈল", "বালিয়াডাঙ্গী", "হরিপুর"],  
-    "পঞ্চগড়": ["পঞ্চগড় সদর", "তেতুলিয়া", "বোদা", "দেবীগঞ্জ", "আটোয়ারী"]  
-  },  
-  "ময়মনসিংহ": {  
-    "ময়মনসিংহ": ["ময়মনসিংহ সদর", "ত্রিশাল", "ভালুকা", "ফুলবাড়িয়া", "মুক্তাগাছা", "গফরগাঁও", "গৌরীপুর", "ঈশ্বরগঞ্জ", "নান্দাইল", "তারাকান্দা", "ফুলপুর", "হালুয়াঘাট", "ধোবাউড়া"],  
-    "জামালপুর": ["জামালপুর সদর", "মেলান্দহ", "মাদারগঞ্জ", "ইসলামপুর", "দেওয়ানগঞ্জ", "বকশীগঞ্জ", "সরিষাবাড়ী"],  
-    "নেত্রকোণা": ["নেত্রকোণা সদর", "ডামুড্যা", "আটপাড়া", "মদন", "ধোবাউড়া", "বেলকুচি"],  
-    "শেরপুর": ["শেরপুর সদর", "নকলা", "নালিতাবাড়ী", "ঝিনাইগাতী", "শ্রীবরদী"]  
-  },  
-  "বরিশাল": {  
-    "বরিশাল": ["বরিশাল সদর", "বানারীপাড়া", "বাকেরগঞ্জ", "গৌরনদী", "মেহেন্দিগঞ্জ", "উজিরপুর", "আগৈলঝাড়া", "বাবুগঞ্জ", "মুলাদী", "হিজলা"],  
-    "পটুয়াখালী": ["পটুয়াখালী সদর", "দশমিনা", "কলাপাড়া", "গলাচিপা", "রাঙ্গাবালী", "বাউফল", "দুমকি", "মির্জাগঞ্জ"],  
-    "পিরোজপুর": ["পিরোজপুর সদর", "নাজিরপুর", "নেছারাবাদ", "ভান্ডারিয়া", "কাউখালী", "ইন্দুরকানী", "মঠবাড়িয়া"],  
-    "বরগুনা": ["বরগুনা সদর", "আমতলী", "তালতলী", "বামনা", "পাথরঘাটা", "বেতাগী"],  
-    "ঝালকাঠি": ["ঝালকাঠি সদর", "রাজাপুর", "কাঠালিয়া", "নলছিটি"],  
-    "ভোলা": ["ভোলা সদর", "লালমোহন", "তজুমদ্দিন", "চরফ্যাশন", "দৌলতখান", "বোরহানউদ্দিন", "মনপুরা"]  
-  },  
-  "সিলেট": {  
-    "সিলেট": ["সিলেট সদর", "জালালাবাদ", "দক্ষিণ সুরমা", "বিমানবন্দর", "গোয়াইনঘাট", "কোম্পানীগঞ্জ", "জৈন্তাপুর", "কানাইঘাট", "বিয়ানীবাজার", "গোলাপগঞ্জ", "ফেঞ্চুগঞ্জ", "ওসমানীনগর", "বিশ্বনাথ"],  
-    "মৌলভীবাজার": ["মৌলভীবাজার সদর", "কুলাউড়া", "রাজনগর", "বড়লেখা", "শ্রীমঙ্গল", "জুড়ী", "কমলগঞ্জ"],  
-    "হবিগঞ্জ": ["হবিগঞ্জ সদর", "বানিয়াচং", "লাখাই", "নবীগঞ্জ", "বাহুবল", "শায়েস্তাগঞ্জ", "মাধবপুর", "আজমিরীগঞ্জ", "চুনারুঘাট"],  
-    "সুনামগঞ্জ": ["সুনামগঞ্জ সদর", "দিরাই", "জগন্নাথপুর", "ছাতক", "দোয়ারাবাজার", "তাহিরপুর", "ধর্মপাশা", "শাল্লা", "জামালগঞ্জ", "মধ্যনগর", "দক্ষিণ সুনামগঞ্জ"]  
-  },  
-  "খুলনা": {  
-    "খুলনা": ["খুলনা সদর", "কাজীপুর", "তেরখাদা", "বটিয়াঘাটা", "ডুমুরিয়া", "দৌলতপুর", "চালনা", "ডিঙ্গি", "পাইকগাছা", "রূপসা", "কয়রা"],  
-    "কুষ্টিয়া": ["কুষ্টিয়া সদর", "ভেড়ামারা", "মিরপুর", "কুমারখালী", "দৌলতপুর", "খোকসা", "রাজাকুন্ডু"],  
-    "যশোর": ["যশোর সদর", "ঝিকরগাছা", "কালীগঞ্জ", "চৌগাছা", "বাঘারপাড়া", "শার্শা", "কেশবপুর", "মণিরামপুর", "বেনাপোল", "মোড়েলগঞ্জ", "সরস্বতীপুর"],  
-    "মাগুরা": ["মাগুরা সদর", "শালিখা", "মহম্মদপুর", "শ্রীপুর"],  
-    "মেহেরপুর": ["মেহেরপুর সদর", "গাংনী", "মুজিবনগর", "কালীগঞ্জ"],  
-    "ঝিনাইদহ": ["ঝিনাইদহ সদর", "কালীগঞ্জ", "শৈলকুপা", "মহেশপুর", "হরিণাকুন্ডু", "চুয়াডাঙ্গা (অংশ)"],  
-    "সাতক্ষীরা": ["সাতক্ষীরা সদর", "কালীগঞ্জ", "তেঁতুলিয়া", "কলারোয়া", "আশাশুনি", "শ্যামনগর", "দাকোপ"],  
-    "চুয়াডাঙ্গা": ["চুয়াডাঙ্গা সদর", "দৌলতপুর", "আলমডাঙ্গা", "দামুড়হুদা"],  
-    "নড়াইল": ["নড়াইল সদর", "কালিয়া", "লোহাগড়া"],  
-    "বাগেরহাট": ["বাগেরহাট সদর", "কচুয়া", "মোল্লাহাট", "রামপাল", "ফকিরহাট", "মোংলা", "নাজিরপুর", "চিতলমারী", "রুপসা"]  
-  },  
-  "ঢাকা": {  
-    "ঢাকা": ["রমনা", "মতিঝিল", "কোতোয়ালী", "সূত্রাপুর", "ওয়ারী", "গুলশান", "বনানী", "বাড্ডা", "মিরপুর", "পল্লবী", "তেজগাঁও", "মোহাম্মদপুর", "শেরেবাংলা নগর", "আদাবর", "ধানমন্ডি", "লালবাগ", "হাজারীবাগ", "কামরাঙ্গীরচর", "ডেমরা", "যাত্রাবাড়ী", "কদমতলী", "মুগদা", "সাভার", "আশুলিয়া", "দারুসসালাম", "খিলগাঁও", "রামপুরা", "উত্তরা পশ্চিম", "উত্তরা পূর্ব", "বিমানবন্দর", "কেরানীগঞ্জ", "নবাবগঞ্জ", "দোহার"],  
-    "গাজীপুর": ["গাজীপুর সদর", "টঙ্গী", "কালীগঞ্জ", "কাপাসিয়া", "কালিয়াকৈর"],  
-    "নারায়ণগঞ্জ": ["নারায়ণগঞ্জ সদর", "ফতুল্লা", "সিদ্ধিরগঞ্জ", "বন্দর", "রূপগঞ্জ", "আড়াইহাজার", "সোনারগাঁও"],  
-    "কিশোরগঞ্জ": ["কিশোরগঞ্জ সদর", "করিমগঞ্জ", "কটিয়াদী", "বাজিতপুর", "কুলিয়ারচর", "হোসেনপুর", "পাকুন্দিয়া", "মিঠামইন", "ইটনা", "অষ্টগ্রাম", "ভৈরব", "নিকলী", "তাড়াইল"],  
-    "মুন্সিগঞ্জ": ["মুন্সিগঞ্জ সদর", "গজারিয়া", "লৌহজং", "শ্রীনগর", "টংগিবাড়ী", "সিরাজদিখান"],  
-    "মানিকগঞ্জ": ["মানিকগঞ্জ সদর", "সাটুরিয়া", "সিংগাইর", "দৌলতপুর", "ঘিওর", "শিবালয়", "হরিরামপুর"],  
-    "রাজবাড়ী": ["রাজবাড়ী সদর", "গোয়ালন্দ", "পাংশা", "বালিয়াকান্দি", "কালুখালী"],  
-    "মাদারীপুর": ["মাদারীপুর সদর", "কালকিনি", "রাজৈর", "শিবচর", "ডাসার"],  
-    "গোপালগঞ্জ": ["গোপালগঞ্জ সদর", "টুঙ্গিপাড়া", "কাশিয়ানী", "কোটালীপাড়া", "মুকসুদপুর"],  
-    "শরীয়তপুর": ["শরীয়তপুর সদর", "জাজিরা", "ডামুড্যা", "নড়িয়া", "ভেদরগঞ্জ", "গোসাইরহাট"],  
-    "ফরিদপুর": ["ফরিদপুর সদর", "বোয়ালমারী", "নগরকান্দা", "মধুখালী", "আলফাডাঙ্গা", "ভাঙ্গা", "চরভদ্রাসন", "সালথা", "সদরপুর"],  
-    "টাঙ্গাইল": ["টাঙ্গাইল সদর", "ঘাটাইল", "দেলদুয়ার", "বাসাইল", "মির্জাপুর", "কালিহাতী", "গোপালপুর", "ভূঞাপুর", "নাগরপুর", "সখীপুর", "ধনবাড়ী", "মধুপুর"],  
-    "নরসিংদী": ["নরসিংদী সদর", "পলাশ", "শিবপুর", "মনোহরদী", "রায়পুরা", "বেলাবো"]  
-  },  
-  "চট্টগ্রাম": {  
-    "চট্টগ্রাম": ["কোতোয়ালী", "চকবাজার", "পাঁচলাইশ", "খুলশী", "আকবরশাহ", "বায়েজিদ বোস্তামী", "পাহাড়তলী", "হালিশহর", "ডবলমুরিং", "বন্দর", "ইপিজেড", "কর্ণফুলী", "পতেঙ্গা", "সদরঘাট", "আগ্রাবাদ", "সীতাকুণ্ড", "মিরসরাই", "ফটিকছড়ি", "রাউজান", "রাঙ্গুনিয়া", "হাটহাজারী", "পটিয়া", "বোয়ালখালী", "আনোয়ারা", "চন্দনাইশ", "সাতকানিয়া", "লোহাগাড়া", "বাঁশখালী", "সন্দ্বীপ", "কর্ণফুলী (গ্রামীণ অংশ)"],  
-    "কক্সবাজার": ["কক্সবাজার সদর", "চকরিয়া", "টেকনাফ", "উখিয়া", "মহেশখালী", "পেকুয়া", "রামু", "কুতুবদিয়া"],  
-    "কুমিল্লা": ["কুমিল্লা সদর", "লাকসাম", "তিতাস", "মনোহরগঞ্জ", "দাউদকান্দি", "নাঙ্গলকোট", "বরুড়া", "হোমনা", "দেবিদ্বার", "বুড়িচং", "মুরাদনগর", "মেঘনা", "চান্দিনা"],  
-    "রাঙ্গামাটি": ["রাঙ্গামাটি সদর", "কাপ্তাই", "বাঘাইছড়ি", "বিলাইছড়ি", "জুরাছড়ি", "লংগদু", "রাজস্থলী", "বরকল", "নানিয়ারচর"],  
-    "খাগড়াছড়ি": ["খাগড়াছড়ি সদর", "মাটিরাঙ্গা", "মানিকছড়ি", "পানছড়ি", "রামগড়", "মহালছড়ি", "দীঘিনালা", "লক্ষীছড়ি", "গুইমারা"],  
-    "বান্দরবান": ["বান্দরবান সদর", "আলীকদম", "থানচি", "লামা", "নাইক্ষ্যংছড়ি", "রুমা", "রোয়াংছড়ি"],  
-    "লক্ষ্মীপুর": ["লক্ষ্মীপুর সদর", "রামগঞ্জ", "রামগতি", "কমলনগর", "রায়পুর"],  
-    "ফেনী": ["ফেনী সদর", "দাগনভূঞা", "ছাগলনাইয়া", "পরশুরাম", "ফুলগাজী", "সোনাগাজী"],  
-    "নোয়াখালী": ["নোয়াখালী সদর", "কোম্পানীগঞ্জ", "সুবর্ণচর", "সোনাইমুড়ি", "হাতিয়া", "কবিরহাট", "চাটখিল", "সেনবাগ", "বেগমগঞ্জ"],  
-    "চাঁদপুর": ["চাঁদপুর সদর", "হাজীগঞ্জ", "ফরিদগঞ্জ", "শাহরাস্তি", "কচুয়া", "মতলব উত্তর", "মতলব দক্ষিণ"],  
-    "ব্রাহ্মণবাড়িয়া": ["ব্রাহ্মণবাড়িয়া সদর", "নবীনগর", "কসবা", "সরাইল", "আশুগঞ্জ", "বাঞ্ছারামপুর", "বিজয়নগর", "আখাউড়া"]  
-  },  
-  "রাজশাহী": {
-    "রাজশাহী": ["বোয়ালিয়া মডেল", "রাজপাড়া", "শাহ মখদুম", "মতিহার", "পবা", "বাগমারা", "গোদাগাড়ী", "চারঘাট", "দূর্গাপুর", "মোহনপুর", "পুঠিয়া", "তানোর"],
-    "নাটোর": ["নাটোর সদর", "নলডাঙ্গা", "বড়াইগ্রাম", "বাগাতিপাড়া", "লালপুর", "গুরুদাসপুর", "সিংড়া"],
-    "নওগাঁ": ["নওগাঁ সদর", "মহাদেবপুর", "মান্দা", "আত্রাই", "রাণীনগর", "পত্নীতলা", "ধামইরহাট", "সাপাহার", "পোরশা", "নিয়ামতপুর", "বদলগাছী"],
-    "পাবনা": ["পাবনা সদর", "ঈশ্বরদী", "আটঘরিয়া", "সাঁথিয়া", "সুজানগর", "বেড়া", "ভাঙ্গুড়া", "চাটমোহর", "ফরিদপুর (পাবনা)"],
-    "বগুড়া": ["বগুড়া সদর", "শাহজাহানপুর", "গাবতলী", "শেরপুর", "শিবগঞ্জ", "সোনাতলা", "ধুনট", "সারিয়াকান্দি", "দুপচাঁচিয়া", "আদমদিঘি", "কাহালু", "নন্দীগ্রাম"],
-    "জয়পুরহাট": ["জয়পুরহাট সদর", "আক্কেলপুর", "কালাই", "পাঁচবিবি", "ক্ষেতলাল"],
-    "চাঁপাইনবাবগঞ্জ": ["চাঁপাইনবাবগঞ্জ সদর", "শিবগঞ্জ", "গোমস্তাপুর", "নাচোল", "ভোলাহাট"],
-    "সিরাজগঞ্জ": ["সিরাজগঞ্জ সদর", "কামারখন্দ", "কাজিপুর", "রায়গঞ্জ", "তাড়াশ", "উল্লাপাড়া", "শাহজাদপুর", "বেলকুচি", "চৌহালী"]
+  // ==================== বাংলাদেশ জেলা/থানা ডেটা ====================
+  const data = {
+    "রংপুর": {
+      "রংপুর": ["সদর","মিঠাপুকুর","বদরগঞ্জ","গঙ্গাচড়া","পীরগঞ্জ","কাউনিয়া","তারাগঞ্জ","হারাগাছ"],
+      "দিনাজপুর": ["দিনাজপুর সদর","বোচাগঞ্জ","বিরল","কাহারোল","পার্বতীপুর","ফুলবাড়ী","নবাবগঞ্জ","ঘোড়াঘাট","বিরামপুর","হাকিমপুর","চিরিরবন্দর","খানসামা","হিলি"],
+      "গাইবান্ধা": ["গাইবান্ধা সদর","সুন্দরগঞ্জ","সাদুল্লাপুর","পলাশবাড়ী","গোবিন্দগঞ্জ","ফুলছড়ি","সাঘাটা"],
+      "কুড়িগ্রাম": ["কুড়িগ্রাম সদর","নাগেশ্বরী","ভূরুঙ্গামারী","রৌমারী","চিলমারী","রাজারহাট","ফুলবাড়ী","উলিপুর","রাজিবপুর"],
+      "লালমনিরহাট": ["লালমনিরহাট সদর","কালীগঞ্জ","হাতীবান্ধা","পাটগ্রাম","আদিতমারী"],
+      "নীলফামারী": ["নীলফামারী সদর","সৈয়দপুর","জলঢাকা","কিশোরগঞ্জ","ডোমার","ডিমলা"],
+      "ঠাকুরগাঁও": ["ঠাকুরগাঁও সদর","পীরগঞ্জ","রানীশংকৈল","বালিয়াডাঙ্গী","হরিপুর"],
+      "পঞ্চগড়": ["পঞ্চগড় সদর","তেতুলিয়া","বোদা","দেবীগঞ্জ","আটোয়ারী"]
+    },
+    "ময়মনসিংহ": {
+      "ময়মনসিংহ": ["ময়মনসিংহ সদর","ত্রিশাল","ভালুকা","ফুলবাড়িয়া","মুক্তাগাছা","গফরগাঁও","গৌরীপুর","ঈশ্বরগঞ্জ","নান্দাইল","তারাকান্দা","ফুলপুর","হালুয়াঘাট","ধোবাউড়া"],
+      "জামালপুর": ["জামালপুর সদর","মেলান্দহ","মাদারগঞ্জ","ইসলামপুর","দেওয়ানগঞ্জ","বকশীগঞ্জ","সরিষাবাড়ী"],
+      "নেত্রকোণা": ["নেত্রকোণা সদর","আটপাড়া","মদন","ধোবাউড়া","পূর্বধলা","কলমাকান্দা","বারহাট্টা","মোহনগঞ্জ","খালিয়াজুরী","কেন্দুয়া","দুর্গাপুর"],
+      "শেরপুর": ["শেরপুর সদর","নকলা","নালিতাবাড়ী","ঝিনাইগাতী","শ্রীবরদী"]
+    },
+    "বরিশাল": {
+      "বরিশাল": ["বরিশাল সদর","বানারীপাড়া","বাকেরগঞ্জ","গৌরনদী","মেহেন্দিগঞ্জ","উজিরপুর","আগৈলঝাড়া","বাবুগঞ্জ","মুলাদী","হিজলা"],
+      "পটুয়াখালী": ["পটুয়াখালী সদর","দশমিনা","কলাপাড়া","গলাচিপা","রাঙ্গাবালী","বাউফল","দুমকি","মির্জাগঞ্জ"],
+      "পিরোজপুর": ["পিরোজপুর সদর","নাজিরপুর","নেছারাবাদ","ভান্ডারিয়া","কাউখালী","ইন্দুরকানী","মঠবাড়িয়া"],
+      "বরগুনা": ["বরগুনা সদর","আমতলী","তালতলী","বামনা","পাথরঘাটা","বেতাগী"],
+      "ঝালকাঠি": ["ঝালকাঠি সদর","রাজাপুর","কাঠালিয়া","নলছিটি"],
+      "ভোলা": ["ভোলা সদর","লালমোহন","তজুমদ্দিন","চরফ্যাশন","দৌলতখান","বোরহানউদ্দিন","মনপুরা"]
+    },
+    "সিলেট": {
+      "সিলেট": ["সিলেট সদর","জালালাবাদ","দক্ষিণ সুরমা","গোয়াইনঘাট","কোম্পানীগঞ্জ","জৈন্তাপুর","কানাইঘাট","বিয়ানীবাজার","গোলাপগঞ্জ","ফেঞ্চুগঞ্জ","ওসমানীনগর","বিশ্বনাথ"],
+      "মৌলভীবাজার": ["মৌলভীবাজার সদর","কুলাউড়া","রাজনগর","বড়লেখা","শ্রীমঙ্গল","জুড়ী","কমলগঞ্জ"],
+      "হবিগঞ্জ": ["হবিগঞ্জ সদর","বানিয়াচং","লাখাই","নবীগঞ্জ","বাহুবল","শায়েস্তাগঞ্জ","মাধবপুর","আজমিরীগঞ্জ","চুনারুঘাট"],
+      "সুনামগঞ্জ": ["সুনামগঞ্জ সদর","দিরাই","জগন্নাথপুর","ছাতক","দোয়ারাবাজার","তাহিরপুর","ধর্মপাশা","শাল্লা","জামালগঞ্জ","মধ্যনগর","দক্ষিণ সুনামগঞ্জ"]
+    },
+    "খুলনা": {
+      "খুলনা": ["খুলনা সদর","তেরখাদা","বটিয়াঘাটা","ডুমুরিয়া","দৌলতপুর","পাইকগাছা","রূপসা","কয়রা","ফুলতলা","দীঘলিয়া"],
+      "কুষ্টিয়া": ["কুষ্টিয়া সদর","ভেড়ামারা","মিরপুর","কুমারখালী","দৌলতপুর","খোকসা"],
+      "যশোর": ["যশোর সদর","ঝিকরগাছা","কালীগঞ্জ","চৌগাছা","বাঘারপাড়া","শার্শা","কেশবপুর","মণিরামপুর","অভয়নগর"],
+      "মাগুরা": ["মাগুরা সদর","শালিখা","মহম্মদপুর","শ্রীপুর"],
+      "মেহেরপুর": ["মেহেরপুর সদর","গাংনী","মুজিবনগর"],
+      "ঝিনাইদহ": ["ঝিনাইদহ সদর","কালীগঞ্জ","শৈলকুপা","মহেশপুর","হরিণাকুন্ডু","কোটচাঁদপুর"],
+      "সাতক্ষীরা": ["সাতক্ষীরা সদর","কালীগঞ্জ","তালা","কলারোয়া","আশাশুনি","শ্যামনগর","দেবহাটা"],
+      "চুয়াডাঙ্গা": ["চুয়াডাঙ্গা সদর","দৌলতপুর","আলমডাঙ্গা","দামুড়হুদা","জীবননগর"],
+      "নড়াইল": ["নড়াইল সদর","কালিয়া","লোহাগড়া"],
+      "বাগেরহাট": ["বাগেরহাট সদর","কচুয়া","মোল্লাহাট","রামপাল","ফকিরহাট","মোংলা","চিতলমারী","শরণখোলা","মোড়েলগঞ্জ"]
+    },
+    "ঢাকা": {
+      "ঢাকা": ["রমনা","মতিঝিল","কোতোয়ালী","সূত্রাপুর","ওয়ারী","গুলশান","বনানী","বাড্ডা","মিরপুর","পল্লবী","তেজগাঁও","মোহাম্মদপুর","শেরেবাংলা নগর","আদাবর","ধানমন্ডি","লালবাগ","হাজারীবাগ","কামরাঙ্গীরচর","ডেমরা","যাত্রাবাড়ী","কদমতলী","মুগদা","সাভার","আশুলিয়া","দারুসসালাম","খিলগাঁও","রামপুরা","উত্তরা পশ্চিম","উত্তরা পূর্ব","বিমানবন্দর","কেরানীগঞ্জ","নবাবগঞ্জ","দোহার"],
+      "গাজীপুর": ["গাজীপুর সদর","টঙ্গী","কালীগঞ্জ","কাপাসিয়া","কালিয়াকৈর","শ্রীপুর"],
+      "নারায়ণগঞ্জ": ["নারায়ণগঞ্জ সদর","ফতুল্লা","সিদ্ধিরগঞ্জ","বন্দর","রূপগঞ্জ","আড়াইহাজার","সোনারগাঁও"],
+      "কিশোরগঞ্জ": ["কিশোরগঞ্জ সদর","করিমগঞ্জ","কটিয়াদী","বাজিতপুর","কুলিয়ারচর","হোসেনপুর","পাকুন্দিয়া","মিঠামইন","ইটনা","অষ্টগ্রাম","ভৈরব","নিকলী","তাড়াইল"],
+      "মুন্সিগঞ্জ": ["মুন্সিগঞ্জ সদর","গজারিয়া","লৌহজং","শ্রীনগর","টংগিবাড়ী","সিরাজদিখান"],
+      "মানিকগঞ্জ": ["মানিকগঞ্জ সদর","সাটুরিয়া","সিংগাইর","দৌলতপুর","ঘিওর","শিবালয়","হরিরামপুর"],
+      "রাজবাড়ী": ["রাজবাড়ী সদর","গোয়ালন্দ","পাংশা","বালিয়াকান্দি","কালুখালী"],
+      "মাদারীপুর": ["মাদারীপুর সদর","কালকিনি","রাজৈর","শিবচর","ডাসার"],
+      "গোপালগঞ্জ": ["গোপালগঞ্জ সদর","টুঙ্গিপাড়া","কাশিয়ানী","কোটালীপাড়া","মুকসুদপুর"],
+      "শরীয়তপুর": ["শরীয়তপুর সদর","জাজিরা","ডামুড্যা","নড়িয়া","ভেদরগঞ্জ","গোসাইরহাট"],
+      "ফরিদপুর": ["ফরিদপুর সদর","বোয়ালমারী","নগরকান্দা","মধুখালী","আলফাডাঙ্গা","ভাঙ্গা","চরভদ্রাসন","সালথা","সদরপুর"],
+      "টাঙ্গাইল": ["টাঙ্গাইল সদর","ঘাটাইল","দেলদুয়ার","বাসাইল","মির্জাপুর","কালিহাতী","গোপালপুর","ভূঞাপুর","নাগরপুর","সখীপুর","ধনবাড়ী","মধুপুর"],
+      "নরসিংদী": ["নরসিংদী সদর","পলাশ","শিবপুর","মনোহরদী","রায়পুরা","বেলাবো"]
+    },
+    "চট্টগ্রাম": {
+      "চট্টগ্রাম": ["কোতোয়ালী","চকবাজার","পাঁচলাইশ","খুলশী","আকবরশাহ","বায়েজিদ বোস্তামী","পাহাড়তলী","হালিশহর","ডবলমুরিং","বন্দর","ইপিজেড","পতেঙ্গা","সীতাকুণ্ড","মিরসরাই","ফটিকছড়ি","রাউজান","রাঙ্গুনিয়া","হাটহাজারী","পটিয়া","বোয়ালখালী","আনোয়ারা","চন্দনাইশ","সাতকানিয়া","লোহাগাড়া","বাঁশখালী","সন্দ্বীপ","কর্ণফুলী"],
+      "কক্সবাজার": ["কক্সবাজার সদর","চকরিয়া","টেকনাফ","উখিয়া","মহেশখালী","পেকুয়া","রামু","কুতুবদিয়া"],
+      "কুমিল্লা": ["কুমিল্লা সদর","লাকসাম","তিতাস","মনোহরগঞ্জ","দাউদকান্দি","নাঙ্গলকোট","বরুড়া","হোমনা","দেবিদ্বার","বুড়িচং","মুরাদনগর","মেঘনা","চান্দিনা","চৌদ্দগ্রাম","ব্রাহ্মণপাড়া","লালমাই"],
+      "রাঙ্গামাটি": ["রাঙ্গামাটি সদর","কাপ্তাই","বাঘাইছড়ি","বিলাইছড়ি","জুরাছড়ি","লংগদু","রাজস্থলী","বরকল","নানিয়ারচর"],
+      "খাগড়াছড়ি": ["খাগড়াছড়ি সদর","মাটিরাঙ্গা","মানিকছড়ি","পানছড়ি","রামগড়","মহালছড়ি","দীঘিনালা","লক্ষীছড়ি","গুইমারা"],
+      "বান্দরবান": ["বান্দরবান সদর","আলীকদম","থানচি","লামা","নাইক্ষ্যংছড়ি","রুমা","রোয়াংছড়ি"],
+      "লক্ষ্মীপুর": ["লক্ষ্মীপুর সদর","রামগঞ্জ","রামগতি","কমলনগর","রায়পুর"],
+      "ফেনী": ["ফেনী সদর","দাগনভূঞা","ছাগলনাইয়া","পরশুরাম","ফুলগাজী","সোনাগাজী"],
+      "নোয়াখালী": ["নোয়াখালী সদর","কোম্পানীগঞ্জ","সুবর্ণচর","সোনাইমুড়ি","হাতিয়া","কবিরহাট","চাটখিল","সেনবাগ","বেগমগঞ্জ"],
+      "চাঁদপুর": ["চাঁদপুর সদর","হাজীগঞ্জ","ফরিদগঞ্জ","শাহরাস্তি","কচুয়া","মতলব উত্তর","মতলব দক্ষিণ"],
+      "ব্রাহ্মণবাড়িয়া": ["ব্রাহ্মণবাড়িয়া সদর","নবীনগর","কসবা","সরাইল","আশুগঞ্জ","বাঞ্ছারামপুর","বিজয়নগর","আখাউড়া"]
+    },
+    "রাজশাহী": {
+      "রাজশাহী": ["বোয়ালিয়া","রাজপাড়া","শাহ মখদুম","মতিহার","পবা","বাগমারা","গোদাগাড়ী","চারঘাট","দূর্গাপুর","মোহনপুর","পুঠিয়া","তানোর"],
+      "নাটোর": ["নাটোর সদর","নলডাঙ্গা","বড়াইগ্রাম","বাগাতিপাড়া","লালপুর","গুরুদাসপুর","সিংড়া"],
+      "নওগাঁ": ["নওগাঁ সদর","মহাদেবপুর","মান্দা","আত্রাই","রাণীনগর","পত্নীতলা","ধামইরহাট","সাপাহার","পোরশা","নিয়ামতপুর","বদলগাছী"],
+      "পাবনা": ["পাবনা সদর","ঈশ্বরদী","আটঘরিয়া","সাঁথিয়া","সুজানগর","বেড়া","ভাঙ্গুড়া","চাটমোহর","ফরিদপুর"],
+      "বগুড়া": ["বগুড়া সদর","শাহজাহানপুর","গাবতলী","শেরপুর","শিবগঞ্জ","সোনাতলা","ধুনট","সারিয়াকান্দি","দুপচাঁচিয়া","আদমদিঘি","কাহালু","নন্দীগ্রাম"],
+      "জয়পুরহাট": ["জয়পুরহাট সদর","আক্কেলপুর","কালাই","পাঁচবিবি","ক্ষেতলাল"],
+      "চাঁপাইনবাবগঞ্জ": ["চাঁপাইনবাবগঞ্জ সদর","শিবগঞ্জ","গোমস্তাপুর","নাচোল","ভোলাহাট"],
+      "সিরাজগঞ্জ": ["সিরাজগঞ্জ সদর","কামারখন্দ","কাজিপুর","রায়গঞ্জ","তাড়াশ","উল্লাপাড়া","শাহজাদপুর","বেলকুচি","চৌহালী"]
     }
   };
 
-  // DOM elements
-  const divisionSelect = document.getElementById("division");
-  const districtSelect = document.getElementById("district");
-  const thanaSelect = document.getElementById("thana");
-
-  // URL parameter থেকে প্রোডাক্ট, মূল্য ও পরিমাণ সেট করা
+  // ==================== URL থেকে পণ্যের তথ্য ====================
   window.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const name  = params.get('name')  || 'পণ্য নির্বাচিত হয়নি';
+    const price = params.get('price') || '০';
+    const qty   = params.get('qty')   || '১';
+
+    // hidden fields এ সেট (ফর্মে যাবে)
+    document.getElementById('product').value    = name;
+    document.getElementById('totalPrice').value = price;
+    document.getElementById('qty').value        = qty;
+
+    // সারাংশ বক্সে দেখাবে
+    document.getElementById('summaryName').innerText  = name;
+    document.getElementById('summaryQty').innerText   = `পরিমাণ: ${qty}`;
+    document.getElementById('summaryPrice').innerText = `মোট: ৳${parseInt(price).toLocaleString()}`;
+
     districtSelect.disabled = true;
     thanaSelect.disabled = true;
-
-    const urlParams = new URLSearchParams(window.location.search);
-
-// 👉 এখানে তুমি আগে যেটা পাঠাচ্ছো সেটার সাথে মিল রাখতে হবে
-const product = urlParams.get('name');   // ❗ name (product না)
-const price = urlParams.get('price');
-const qty = urlParams.get('qty');
-
-if (product) {
-  document.getElementById('product').value = product;
-}
-
-if (price) {
-  document.getElementById('totalPrice').value = price;
-}
-
-if (qty) {
-  document.getElementById('qty').value = qty;
-}
-
-    // ফিল্ড যদি ফাঁকা থাকে তাহলে ইউজার বুঝতে পারে (কোয়েরি স্ট্রিং ছাড়া পেজ খুললে)
-    if (!product) document.getElementById('product').value = "পণ্য নির্বাচিত হয়নি";
-    if (!price) document.getElementById('totalPrice').value = "০";
-    if (!qty) document.getElementById('qty').value = "১";
   });
 
-  // বিভাগ পরিবর্তনে জেলা লোড
-  divisionSelect.addEventListener("change", function() {
-    const division = this.value;
-    districtSelect.innerHTML = '<option value="">-- জেলা নির্বাচন করুন --</option>';
-    thanaSelect.innerHTML = '<option value="">-- থানা/উপজেলা নির্বাচন করুন --</option>';
-    thanaSelect.disabled = true;
+  // ==================== বিভাগ → জেলা → থানা ====================
+  const divisionSelect = document.getElementById('division');
+  const districtSelect = document.getElementById('district');
+  const thanaSelect    = document.getElementById('thana');
 
-    if (division && data[division]) {
-      Object.keys(data[division]).forEach(district => {
-        const option = document.createElement("option");
-        option.value = district;
-        option.textContent = district;
-        districtSelect.appendChild(option);
+  divisionSelect.addEventListener('change', function () {
+    const div = this.value;
+    districtSelect.innerHTML = '<option value="">-- জেলা নির্বাচন করুন --</option>';
+    thanaSelect.innerHTML    = '<option value="">-- থানা/উপজেলা নির্বাচন করুন --</option>';
+    thanaSelect.disabled     = true;
+
+    if (div && data[div]) {
+      Object.keys(data[div]).forEach(d => {
+        const opt = document.createElement('option');
+        opt.value = d; opt.textContent = d;
+        districtSelect.appendChild(opt);
       });
       districtSelect.disabled = false;
     } else {
       districtSelect.disabled = true;
-      districtSelect.innerHTML = '<option value="">-- জেলা নির্বাচন করুন --</option>';
     }
   });
 
-  // জেলা পরিবর্তনে থানা লোড
-  districtSelect.addEventListener("change", function() {
-    const division = divisionSelect.value;
-    const district = this.value;
+  districtSelect.addEventListener('change', function () {
+    const div = divisionSelect.value;
+    const dist = this.value;
     thanaSelect.innerHTML = '<option value="">-- থানা/উপজেলা নির্বাচন করুন --</option>';
 
-    if (division && district && data[division] && data[division][district]) {
-      data[division][district].forEach(thana => {
-        const option = document.createElement("option");
-        option.value = thana;
-        option.textContent = thana;
-        thanaSelect.appendChild(option);
+    if (div && dist && data[div]?.[dist]) {
+      data[div][dist].forEach(t => {
+        const opt = document.createElement('option');
+        opt.value = t; opt.textContent = t;
+        thanaSelect.appendChild(opt);
       });
       thanaSelect.disabled = false;
     } else {
@@ -353,56 +340,42 @@ if (qty) {
     }
   });
 
-  // ফাইনাল সাবমিটের আগে সম্পূর্ণ ভ্যালিডেশন (readonly সহ সব ফিল্ড, থানা/জেলা সিলেক্টেড)
-  document.getElementById('orderForm').addEventListener('submit', function(e) {
-    const fields = [
-      { id: 'product', name: 'প্রোডাক্টের নাম' },
-      { id: 'totalPrice', name: 'মোট দাম' },
-      { id: 'qty', name: 'পরিমাণ' },
-      { id: 'name', name: 'পূর্ণ নাম' },
-      { id: 'phone', name: 'মোবাইল নাম্বার' },
-      { id: 'division', name: 'বিভাগ' },
-      { id: 'district', name: 'জেলা' },
-      { id: 'thana', name: 'থানা/উপজেলা' },
-      { id: 'village', name: 'গ্রাম / বিস্তারিত ঠিকানা' },
-      { id: 'pickup', name: 'সংগ্রহের স্থান' }
-    ];
-
-    for (const field of fields) {
-      const el = document.getElementById(field.id);
-      if (!el) continue;
-      let value = '';
-      if (el.tagName === 'SELECT') {
-        value = el.options[el.selectedIndex]?.value || '';
-      } else {
-        value = el.value.trim();
-      }
-      if (!value) {
-        alert(`⚠️ ${field.name} অবশ্যই পূরণ করতে হবে।`);
-        el.focus();
-        e.preventDefault();
-        return;
-      }
+  // ==================== ফর্ম ভ্যালিডেশন ====================
+  document.getElementById('orderForm').addEventListener('submit', function (e) {
+    // নাম চেক
+    if (!document.getElementById('name').value.trim()) {
+      alert('⚠️ পূর্ণ নাম লিখুন।');
+      document.getElementById('name').focus();
+      e.preventDefault(); return;
     }
 
-    // মোবাইল নাম্বার মোটামুটি 11 ডিজিটের কিনা বেসিক চেক
-    const phoneVal = document.getElementById('phone').value.trim();
-    const phoneDigits = phoneVal.replace(/\D/g, '');
-    if (phoneDigits.length < 10 || phoneDigits.length > 14) {
-      alert('📱 সঠিক মোবাইল নাম্বার দিন (০১XXXXXXXXX ফরম্যাটে)');
+    // ফোন চেক
+    const phone = document.getElementById('phone').value.trim().replace(/\D/g, '');
+    if (phone.length < 10 || phone.length > 14) {
+      alert('📱 সঠিক মোবাইল নাম্বার দিন (01XXXXXXXXX)');
       document.getElementById('phone').focus();
-      e.preventDefault();
-      return;
+      e.preventDefault(); return;
     }
 
-    // জেলা ও থানা সিলেক্টেড কিনা নিশ্চিত (select মানে value অবশ্যই সেট)
+    // বিভাগ/জেলা/থানা চেক
     if (!divisionSelect.value || !districtSelect.value || !thanaSelect.value) {
-      alert('দয়া করে সম্পূর্ণ ঠিকানা (বিভাগ, জেলা, থানা) নির্বাচন করুন');
-      e.preventDefault();
-      return;
+      alert('📍 সম্পূর্ণ ঠিকানা (বিভাগ, জেলা, থানা) নির্বাচন করুন।');
+      e.preventDefault(); return;
     }
 
-    // সব ঠিক থাকলে ফর্ম Submit হবে FormSubmit এ
+    // গ্রাম/ঠিকানা চেক
+    if (!document.getElementById('village').value.trim()) {
+      alert('🏠 বিস্তারিত ঠিকানা লিখুন।');
+      document.getElementById('village').focus();
+      e.preventDefault(); return;
+    }
+
+    // পিকআপ চেক
+    if (!document.getElementById('pickup').value.trim()) {
+      alert('📦 সংগ্রহের স্থান লিখুন।');
+      document.getElementById('pickup').focus();
+      e.preventDefault(); return;
+    }
   });
 </script>
 </body>
